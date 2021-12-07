@@ -13,7 +13,6 @@ import {
     FormControl,
     Select,
     Chip,
-    Button,
     Typography,
     Grid,
     Icon,
@@ -24,7 +23,7 @@ import {
 import {
     getProductList,
     addProductToCart,
-    getCategoryList
+    getCategoryList,
 } from 'app/redux/actions/EcommerceActions'
 
 
@@ -38,22 +37,6 @@ const MenuProps = {
         },
     },
 };
-
-
-const names = [
-    'Oliver Hansen',
-    'Van Henry',
-    'April Tucker',
-    'Ralph Hubbard',
-    'Omar Alexander',
-    'Carlos Abbott',
-    'Miriam Wagner',
-    'Bradley Wilkerson',
-    'Virginia Andrews',
-    'Kelly Snyder',
-];
-
-
 
 function getStyles(name, categoryName, theme) {
     return {
@@ -93,9 +76,7 @@ let productListLoaded = false
 const AppEcommerce = () => {
     const { palette } = useTheme()
     const theme = useTheme()
-    const bgError = palette.error.main
     const bgPrimary = palette.primary.main
-    const bgSecondary = palette.secondary.main
     const dispatch = useDispatch()
     const { productList, categoryList } = useSelector(state => state.ecommerce)
     const [products, setProducts] = useState([])
@@ -115,12 +96,17 @@ const AppEcommerce = () => {
     if (!productListLoaded) {
         dispatch(getProductList())
         dispatch(getCategoryList())
+        setProducts(productList)
+        // setProducts(productList)
         productListLoaded = true
     }
 
-    useEffect(() => {
-        setProducts(productList)
-    }, [])
+    // useEffect(() => {
+    //     // dispatch(getProductList())
+    //     // dispatch(getCategoryList())
+    //     setProducts(productList)
+    // }, [])
+
 
     useEffect(() => {
         if (categoryName.length === 0) {
@@ -132,6 +118,7 @@ const AppEcommerce = () => {
             setProducts(newProducts)
         }
         console.log(categoryName)
+        console.log(products)
     }, [categoryName])
 
     return (
@@ -166,7 +153,7 @@ const AppEcommerce = () => {
                 </Select>
             </FormControl>
             <Grid container spacing={3} sx={{ mb: '24px' }}>
-                {products.map((product) => (
+                {productList.map((product) => (
                     <Grid key={product.id} item xs={6} md={3}>
                         {/* Product card contain id, brand, category, description, freeShipping, imgUrl, price, rating, title, totalUning */}
                         <Card>

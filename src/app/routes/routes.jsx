@@ -1,13 +1,13 @@
 import NotFound from "app/views/NotFound";
 import ecommerceRoute from "app/views/ecommerce/EcommerceRoute";
-import MatxLayout from '../components/MatxLayout/MatxLayout'
+import { AppLayout } from '../components'
 
 export const AllPages = () => {
   const all_routes = [
     {
       path: "/",
       element: (
-        <MatxLayout />
+        <AppLayout />
       ),
       children: [
         ...ecommerceRoute,

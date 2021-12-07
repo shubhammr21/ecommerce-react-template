@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import Loading from '../MatxLoading/MatxLoading'
+import Loading from '../Loading/Loading'
 
 const Loadable = (Component) => (props) => (
    <Suspense fallback={<Loading />}>

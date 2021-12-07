@@ -1,12 +1,9 @@
-import { useEffect } from 'react'
-import useAuth from 'app/hooks/useAuth'
+import { Fragment, useState, useEffect } from 'react'
 import { H6, Small } from '../Typography'
 import { Box, styled, useTheme } from '@mui/system'
-import { useNavigate } from 'react-router-dom'
 import useSettings from 'app/hooks/useSettings'
-import React, { Fragment, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { themeShadows } from '../MatxTheme/themeColors'
+import { themeShadows } from '../Theme/themeColors'
 import { sideNavWidth, topBarHeight } from 'app/utils/constant'
 import {
     getCartList,
@@ -89,8 +86,6 @@ function ShoppingCart({ container }) {
     const [totalCost, setTotalCost] = useState(0)
     const [panelOpen, setPanelOpen] = useState(false)
     const dispatch = useDispatch()
-    const navigate = useNavigate()
-    const { user } = useAuth()
     const { cartList } = useSelector((state) => state.ecommerce)
     const { settings } = useSettings()
     const theme = useTheme()
@@ -103,13 +98,6 @@ function ShoppingCart({ container }) {
 
     const handleDrawerToggle = () => {
         setPanelOpen(!panelOpen)
-    }
-
-    const handleCheckoutClick = () => {
-        if (totalCost > 0) {
-            navigate('/ecommerce/checkout')
-            setPanelOpen(false)
-        }
     }
 
     useEffect(() => {
@@ -207,7 +195,7 @@ function ShoppingCart({ container }) {
                                         onClick={() =>
                                             dispatch(
                                                 deleteProductFromCart(
-                                                    user.userId,
+                                                    'user.id',
                                                     product.id
                                                 )
                                             )
@@ -223,9 +211,9 @@ function ShoppingCart({ container }) {
                             sx={{ width: '100%', borderRadius: 0 }}
                             variant="contained"
                             color="primary"
-                            onClick={handleCheckoutClick}
+
                         >
-                            Checkout (${totalCost.toFixed(2)})
+                            Total (${totalCost.toFixed(2)})
                         </Button>
                     </MiniCart>
                 </Drawer>
