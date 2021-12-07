@@ -12,6 +12,7 @@ import {
 const initialState = {
     productList: [],
     cartList: [],
+    categoryList: [],
 }
 
 const EcommerceReducer = function (state = initialState, action) {

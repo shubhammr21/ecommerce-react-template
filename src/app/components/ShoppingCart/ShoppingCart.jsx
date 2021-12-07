@@ -114,7 +114,6 @@ function ShoppingCart({ container }) {
 
     useEffect(() => {
         let total = 0
-
         cartList.forEach((product) => {
             total += product.price * product.amount
         })
@@ -162,7 +161,7 @@ function ShoppingCart({ container }) {
                                             onClick={() =>
                                                 dispatch(
                                                     updateCartAmount(
-                                                        user.id,
+                                                        'user.id',
                                                         product.id,
                                                         product.amount + 1
                                                     )
@@ -179,7 +178,7 @@ function ShoppingCart({ container }) {
                                             onClick={() =>
                                                 dispatch(
                                                     updateCartAmount(
-                                                        user.id,
+                                                        'user.id',
                                                         product.id,
                                                         product.amount - 1
                                                     )
